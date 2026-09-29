@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env
+*.log
+.DS_Store
+venv/
+__pycache__/
+
+mobile-app/.flutter/
+mobile-app/build/
+mobile-app/.dart_tool/
+mobile-app/.idea/
+mobile-app/flutter/engine/
