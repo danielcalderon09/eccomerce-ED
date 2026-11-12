@@ -31,3 +31,21 @@ export const verificarToken = (rolesPermitidos: string[]) => {
         }
     };
 };
+
+export const tokenOpcional = (req: AuthRequest, res: Response, next: NextFunction): void => {
+    const authHeader = req.headers['authorization'];
+    const token = authHeader?.split(' ')[1];
+
+    if (!token) {
+        return next();
+    }
+
+    try {
+        const verificado = jwt.verify(token, process.env.JWT_SECRET || 'FirmaSecretaInstitucional2026') as any;
+        req.usuario_id = verificado.id;
+        req.rol = verificado.rol;
+    } catch {
+        // Token no válido o expirado, continúa como invitado
+    }
+    next();
+};

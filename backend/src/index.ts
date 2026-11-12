@@ -14,6 +14,7 @@ import wishlistRoutes from './routes/wishlist.routes';
 import inventarioRoutes from './routes/inventario.routes';
 import usuariosRoutes from './routes/usuarios.routes';
 import reportesRoutes from './routes/reportes.routes';
+import chatbotRoutes from './routes/chatbot.routes';
 import { securityMiddleware, apiLimiter, authLimiter } from './middleware/security';
 import pool from './config/db';
 
@@ -58,6 +59,8 @@ const swaggerDocument = {
         '/api/inventario/estadisticas': { get: { summary: 'Estadisticas inventario', tags: ['Inventario'], security: [{ bearerAuth: [] }], responses: { '200': { description: 'Estadisticas' } } } },
         '/api/usuarios': { get: { summary: 'Listar usuarios', tags: ['Usuarios'], security: [{ bearerAuth: [] }], responses: { '200': { description: 'Usuarios' } } } },
         '/api/reportes/dashboard': { get: { summary: 'Dashboard admin', tags: ['Reportes'], security: [{ bearerAuth: [] }], responses: { '200': { description: 'Dashboard' } } } },
+        '/api/chatbot/mensaje': { post: { summary: 'Enviar mensaje al asistente virtual', tags: ['Chatbot'], requestBody: { content: { 'application/json': { schema: { type: 'object', properties: { mensaje: { type: 'string' } } } } } }, responses: { '200': { description: 'Respuesta del chatbot' } } } },
+        '/api/chatbot/sugerencias': { get: { summary: 'Obtener sugerencias del chatbot', tags: ['Chatbot'], responses: { '200': { description: 'Preguntas frecuentes' } } } },
     }
 };
 
@@ -75,6 +78,7 @@ app.use('/api/wishlist', wishlistRoutes);
 app.use('/api/inventario', inventarioRoutes);
 app.use('/api/usuarios', usuariosRoutes);
 app.use('/api/reportes', reportesRoutes);
+app.use('/api/chatbot', chatbotRoutes);
 
 app.get('/api/health', async (req, res) => {
     try {

@@ -3,6 +3,7 @@ import { AuthProvider, useAuth } from './context/AuthContext';
 import { ToastProvider } from './context/ToastContext';
 import Login from './components/Login';
 import Dashboard from './components/Dashboard';
+import ChatbotWidget from './components/ChatbotWidget';
 
 function PrivateRoute({ children }) {
     const { usuario } = useAuth();
@@ -34,6 +35,7 @@ function App() {
             <ToastProvider>
                 <BrowserRouter>
                     <AppRoutes />
+                    <ChatbotWidget />
                 </BrowserRouter>
             </ToastProvider>
         </AuthProvider>

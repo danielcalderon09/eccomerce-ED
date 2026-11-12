@@ -2,10 +2,10 @@
 -- Password para todos: password123
 
 INSERT INTO usuarios (nombre, email, password_hash, rol, telefono) VALUES
-('Admin Tienda', 'admin@tienda.com', '$2b$10$XQxBJ5ZzE0R7yKzYzYzYzOQK5z5z5z5z5z5z5z5z5z5z5z5z5z5z5', 'admin', '3001234567'),
-('Juan Perez', 'juan@cliente.com', '$2b$10$XQxBJ5ZzE0R7yKzYzYzYzOQK5z5z5z5z5z5z5z5z5z5z5z5z5z5z5', 'cliente', '3009876543'),
-('Maria Garcia', 'maria@cliente.com', '$2b$10$XQxBJ5ZzE0R7yKzYzYzYzOQK5z5z5z5z5z5z5z5z5z5z5z5z5z5z5', 'cliente', '3001112233'),
-('Carlos Lopez', 'carlos@cliente.com', '$2b$10$XQxBJ5ZzE0R7yKzYzYzYzOQK5z5z5z5z5z5z5z5z5z5z5z5z5z5z5', 'cliente', '3004445566');
+('Admin Tienda', 'admin@tienda.com', '$2a$10$H.0LDqP.iDKUeCMVNWTAXOh.5pHPiwcEVU61Fxc4GXi3CNA3b7Y7O', 'admin', '3001234567'),
+('Juan Perez', 'juan@cliente.com', '$2a$10$H.0LDqP.iDKUeCMVNWTAXOh.5pHPiwcEVU61Fxc4GXi3CNA3b7Y7O', 'cliente', '3009876543'),
+('Maria Garcia', 'maria@cliente.com', '$2a$10$H.0LDqP.iDKUeCMVNWTAXOh.5pHPiwcEVU61Fxc4GXi3CNA3b7Y7O', 'cliente', '3001112233'),
+('Carlos Lopez', 'carlos@cliente.com', '$2a$10$H.0LDqP.iDKUeCMVNWTAXOh.5pHPiwcEVU61Fxc4GXi3CNA3b7Y7O', 'cliente', '3004445566');
 
 -- Direcciones
 INSERT INTO direcciones (usuario_id, etiqueta, direccion, ciudad, departamento, codigo_postal, es_predeterminada) VALUES

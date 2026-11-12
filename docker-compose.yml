@@ -1,32 +1,42 @@
-version: '3.8'
 
 services:
   backend:
     build: ./backend
+    restart: unless-stopped
     ports:
-      - "3000:3000"
+      - "${BACKEND_PORT:-3000}:3000"  # en el servidor el 3000 lo usa Dokploy
     environment:
       - PORT=3000
-      - DATABASE_URL=${DATABASE_URL}
-      - JWT_SECRET=${JWT_SECRET}
+      - DATABASE_URL=${DATABASE_URL:-postgresql://postgres:postgres@db:5432/ecommerce}
+      - JWT_SECRET=${JWT_SECRET:-dev-secret-cambiar-en-produccion}
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   frontend:
     build: ./frontend-web
+    restart: unless-stopped
     ports:
       - "5173:5173"
     environment:
-      - VITE_API_URL=http://localhost:3000
+      - API_PROXY_TARGET=http://backend:3000
+    depends_on:
+      - backend
 
   db:
     image: postgres:15-alpine
+    restart: unless-stopped
     environment:
       - POSTGRES_DB=ecommerce
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ecommerce"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
     ports:
-      - "5432:5432"
+      - "127.0.0.1:${DB_PORT:-5432}:5432"  # solo accesible desde la propia máquina
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./database/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql

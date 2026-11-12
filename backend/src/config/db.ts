@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const databaseUrl = process.env.DATABASE_URL || '';
-const esRemoto = !/localhost|127\.0\.0\.1|::1/.test(new URL(databaseUrl).hostname);
+const esRemoto = !/^(localhost|127\.0\.0\.1|::1|db)$/.test(new URL(databaseUrl).hostname);
 
 const pool = new Pool({
     connectionString: databaseUrl,
